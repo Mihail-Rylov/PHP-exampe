@@ -1,0 +1,3 @@
+ErrorDocument 403 /lab2/my403.html
+ErrorDocument 404 /lab2/my404.html
+Options +indexes

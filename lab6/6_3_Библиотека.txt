@@ -1,0 +1,27 @@
+1
+SELECT im, fam, COUNT(id_reader)
+FROM `lab6_2_readers` as rd
+INNER JOIN `lab6_2_inform` as info
+ON info.reader_id=rd.id_reader
+WHERE NOW()
+BETWEEN info.`take_date`
+AND info.`fact_return_date`
+GROUP BY im, fam
+
+2
+SELECT `name_book`, `year_pub`, `publishing`, COUNT(bk.id_book)as read_count
+FROM `lab6_2_books` AS bk
+INNER JOIN `lab6_2_inform` AS info
+ON bk.id_book=info.book_id
+GROUP BY `name_book`, `year_pub`, `publishing`
+ORDER BY read_count DESC, `name_book`, `year_pub`, `publishing`
+
+3
+SELECT im, fam, DATEDIFF(info.fact_return_date, info.return_date) pros
+FROM lab6_2_readers as rd
+INNER JOIN lab6_2_inform info
+ON info.reader_id = rd.id_reader
+INNER JOIN lab6_2_books  bk
+ON info.book_id = bk.id_book
+WHERE DATEDIFF(info.fact_return_date, info.return_date) > 0
+ORDER BY pros DESC, im, fam

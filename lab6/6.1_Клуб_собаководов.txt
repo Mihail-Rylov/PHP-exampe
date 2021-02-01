@@ -1,0 +1,34 @@
+1
+SELECT lab6_master.ФИО
+FROM lab6_master
+INNER JOIN lab6_dogs
+ON lab6_master.Код_хозяина=lab6_dogs.Хозяин
+WHERE lab6_dogs.Год_рождения=(SELECT MIN(Год_рождения) FROM lab6_dogs)
+GROUP BY lab6_master.ФИО
+ORDER BY lab6_master.ФИО
+
+2
+select o.ФИО, count(d.Код_собаки) count_dogs from lab6_master as o, lab6_dogs as d
+where o.Код_хозяина = d.Хозяин
+group by (d.Хозяин)
+order by o.ФИО, count_dogs;
+
+3
+select d.Кличка, d.Год_рождения, count(e.Занятое_место) c from lab6_participants as e, lab6_dogs as d 
+where d.Код_собаки = e.Код_собаки and e.Занятое_место = 1
+group by (e.Код_собаки)
+order by (c) desc
+limit 1
+
+4
+select d.Кличка, d.Год_рождения, sum(e.Занятое_место) c from lab6_participants as e, lab6_dogs as d 
+where d.Код_собаки = e.Код_собаки
+group by (e.Код_собаки)
+order by (c) desc
+
+5
+SELECT e.name, e.data, e.country, count(e.id)
+FROM lab6_exhibition as e, lab6_dogs as d, lab6_participants as p
+where e.id = p.Выставка and d.Код_собаки = p.Код_собаки
+group by (p.Выставка)
+order by e.data DESC, e.name, p.Выставка

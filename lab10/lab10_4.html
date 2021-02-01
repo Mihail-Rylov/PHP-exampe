@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>Ball</title>
+<script src="js/jquery-latest.js"></script>
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+var y = 50;
+var v = 800;
+function ballBounce(){
+if (y<500)
+y = y +75;
+if ( v>0)
+v = v -80;
+$(".ball").animate (
+    {
+      top: 500
+    },
+    v,
+    function() {
+       $(this).animate (
+	   {
+          top: y
+       },
+       v,
+	   function() { ballBounce()
+       });
+    });
+}
+$("#start").click(function(){
+ballBounce();
+});
+$("#stop").click(function(){
+$(".ball").stop();
+});
+});
+</script>
+<style>
+button {font-size: 1.2em; border: 1px solid #000; width: 100px}
+div.ball{ width:100px;
+height:100px;
+top: 50px;
+background: url("img/myach.png")  center center no-repeat;
+background-size:110px;
+position: relative;
+}
+.bottom {border-bottom: 1px solid #000; height: 600px; width: 500px; margin: 0 auto}
+</style>
+</head>
+<body>
+<button id="start"> Пуск </button><button id="stop"> Стоп </button>
+<div class="bottom"><div class="ball"></div></div>
+</body>
+</html>

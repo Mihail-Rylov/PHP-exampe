@@ -1,0 +1,90 @@
+<!doctype html> <html> 
+<head>
+<meta charset=utf-8> <title>Пример 1. Калькулятор</title> 
+<style> 
+  div   {margin: 20px; border: 1px solid #eee; padding: 10px}
+  body   ,  input,  select {font-size: 1.1em}
+  input { padding: 5px; }
+  p { color : #fff;}
+  #result  { font-size: 1.5em; font-weight: bold }
+  #logorifm { display : none;}
+</style>
+<div>
+
+    <input type="text" id="operand1"> 
+	<select id="operator"> 
+	    <option value="+"   selected="selected">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+		<option value="sqrt" >sqrt</option>
+		<option value="log">log</option>
+	</select>
+    <input type="text" id="operand2">
+	<input type="button" value="="   id="doCalc">&nbsp;<span id="result"></span>
+	</div>
+	<div id="logorifm" ><input type="text" id="logoperand"> Здесь введите основание логорифма</div>
+	<div>
+	 <label>
+    <input type="checkbox" name="rnd" id="rnd2">Округлить до 3х знаков после запятой
+  </label>
+	</div>
+	<script> 
+	   var getID = function(id) {return document.getElementById(id);} 
+       var   operator = getID('operator'),operand1 = getID('operand1'),operand2 = getID('operand2'), logoperand = getID('logoperand'), doCalc  = getID('doCalc'),resultContainer = getID('result'), checkbox = getID('rnd2');       // обработчик события click
+       
+	   
+	   operator.onchange = function() {
+	   
+	   var n = document.getElementById("operator").options.selectedIndex;
+	   if ( n == 4 ) {
+	       document.getElementById('operand2').disabled = true;
+		   document.getElementById('logorifm').style.display = "none";
+	   }
+	   else if ( n == 5) {
+	       document.getElementById('operand2').disabled = true;
+		   document.getElementById('logorifm').style.display = "block";
+	   } 
+	   else 
+	   {
+	       document.getElementById('operand2').disabled = false;
+		   document.getElementById('logorifm').style.display = "none";
+	   } 
+	   }
+	   
+	   doCalc.onclick = function() {
+	   var   result , a  = +operand1.value, b  = +operand2.value;
+	   if (operator.value == 'sqrt' || operator.value == 'log') 
+	    switch(operator.value){ 
+		    case    'sqrt' : result = Math.sqrt(a) ; break;
+			case    'log' : result =  Math.log(a) / Math.log(logoperand.value) ; break;
+			}
+	    else {
+	    if (document.getElementById('operand2').value == '' || document.getElementById('operand1').value == '')
+	     result = 'Введите все операнды';
+         else {
+	        switch(operator.value){ 
+	        case    '+'  :   result = a  + b;    break; 
+			case    '-':   result = a  - b ;   break; 
+			case    '*'  :   result = a  * b ; break;
+			case    '/'  :   result = a / b ; break; 
+        }; 
+     }
+	 }
+	  var x = checkbox.checked;
+       if(x == true){
+ 	   result = result.toFixed(3);
+     }
+ 		
+       
+      
+
+// результат не будет числом (NaN), если не удастся преобразовать переменные к Number
+if (result == 'Введите все операнды') 
+     resultContainer.innerHTML = result;
+	 else {
+if  (isNaN  (result)) result = 'Не удалось вычислить'; resultContainer.innerHTML = result;   
+if  (!isFinite  (result)) result = 'Нельзя делить на 0'; resultContainer.innerHTML = result;   }  }
+</script>     
+</body>
+</html>

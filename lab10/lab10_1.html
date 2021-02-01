@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+  <title>10_1</title>
+  <link rel="stylesheet" type="text/css" href="css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+  <script src="js/jquery-latest.js"></script>
+  <style>
+  body {
+  background-color: pink;
+  
+  }
+  
+  h1 {
+  text-align: center;
+  }
+  
+  .your-class {
+  width : 500px;
+  height: 300px;
+  margin: 20px auto;
+  top:0;
+  lefy:0;
+  right:0;
+  }
+  
+  .da {
+  text-align: center;
+  }
+  
+  #img1 {
+  width: 400px;
+  height: 400px;
+  background: url(img/1.JFIF) center center no-repeat;
+  background-size:400px;
+  }
+  
+  #img2 {
+  width: 400px;
+  height: 400px;
+  background: url(img/2.JFIF) center center no-repeat;
+  background-size:400px;
+  }
+  
+  #img3 {
+  width: 400px;
+  height: 400px;
+  background: url(img/3.JFIF) center center no-repeat;
+  background-size:400px;
+  }
+  
+  #img4 {
+  width: 400px;
+  height: 400px;
+  background: url(img/4.JFIF) center center no-repeat;
+  background-size:400px;
+  }
+  
+  #img5 {
+  width: 400px;
+  height: 400px;
+  background: url(img/5.JFIF) center center no-repeat;
+  background-size:400px;
+  }
+  
+  </style>
+  </head>
+  <body>
+ <h1>Слайдер</h1>
+  <div class="your-class">
+    <div class="da" id="img1"></div>
+    <div class="da" id="img2"></div>
+    <div class="da" id="img3"></div>
+	<div class="da" id="img4"></div>
+	<div class="da" id="img5"></div>
+  </div>
+	<script src="js/slick.js"></script>
+  <script>
+
+    $(document).ready(function(){
+      $('.your-class').slick({});
+    });
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>9.2</title>
+    <link rel="stylesheet" href="../theme/styles2.css">
+    <style>
+       body { padding: 30px; }
+ div { }
+ body, input, select {font-size: 1.6em}
+ input { padding: 10px; }
+ #cards {display: flex}
+ #cards img { opacity: 0.2 ; margin-right: 20px}
+ #cards img.hl { opacity: 1 }
+ #result { color: #888; }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div id="cards">
+            <p> <img src="img/visa.png" id="visa" alt="visa"></p>
+            <p> <img src="img/mc.png" id="mc" alt="mc"></p>
+            <p> <img src="img/visael.png" id="visael" alt="visael"></p>
+            <p> <img src="img/maestro.png" id="maestro"  alt="maestro"></p>
+            <p> <img src="img/JcB.png" id="jcb"  alt="jcb"></p>
+             <p><img src="img/mir.png" id="mir"  alt="mir"></p>
+        </div>
+        <input type="text" id="cardNumberText" value = '4561000011112222'>
+        <input type="button" value="Проверить" id="cardCheck"><p id="result"></p>
+    </div>
+<script>
+    // вспомогательная функция для быстрого доступа к getElementById(id)
+    var getID = function(id) 
+    {
+        return document.getElementById(id);
+    }
+    // получаем элементы для использования в дальнейшем
+    var cardNumberText = getID('cardNumberText'),
+    cardCheck = getID('cardCheck'),
+    cards = getID('cards'),
+    resultContainer = getID('result');
+
+    // определяем новый метод для String - проверка "только цифры"
+    String.prototype.isNumber = function()
+    { 
+        return /^\d+$/.test(this); 
+    }
+
+    // определяем обработчик input для очистки классов изображений карт
+    cardNumberText.oninput = function () 
+    {
+        clearClass();
+    }
+    //функция вставлющая пробелы
+    function chunk(str, n) {
+    var ret = [];
+    var i;
+    var len;
+
+    for(i = 0, len = str.length; i < len; i += n) {
+       ret.push(str.substr(i, n))
+    }
+
+    return ret
+};
+    // обработчик события click
+    cardCheck.onclick = function () 
+    {
+        var result, card;
+        // очищаем класс (изображения затенены)
+        clearClass();
+
+        // если номер только из цифр и его длина = 16, формируем сообщение
+        if ( !cardNumberText.value.replace(/\s/g, '').isNumber() || cardNumberText.value.replace(/\s/g, '').length != 16 ) 
+        {
+            result = "Неверно введен номер карты";
+			resultContainer.innerHTML = result;
+        }
+        else 
+        {
+            result = "Номер карты правильный";
+            // определяем вид карты
+		    if (luhnAlgorithm(cardNumberText.value.replace(/\s/g, '')) === true )
+            resultContainer.innerHTML = result + '</br>Проверка Луна: пройдена' ;
+		    else 
+		    resultContainer.innerHTML = result + '</br>Проверка Луна: не пройдена' ;
+            card = getID(checkCardByNumber(cardNumberText.value.replace(/\s/g, '')));
+			// ставим пробелы 
+			cardNumberText.value = cardNumberText.value.replace(/\s/g, '')
+            cardNumberText.value = chunk(cardNumberText.value, 4).join(' ')
+            // устанавливаем для карты класс для нормального отображения
+            card.className = 'hl';
+
+        }
+
+    }
+    //------------------------amensum----------------------------
+    function luhnAlgorithm(digits) {
+  let sum = 0;
+
+  for (let i = 0; i < digits.length; i++) {
+    let cardNum = parseInt(digits[i]);
+    if ((digits.length - i) % 2 === 0) {
+      cardNum = cardNum * 2;
+
+      if (cardNum > 9) {
+        cardNum = cardNum - 9;
+      }
+    }
+
+    sum += cardNum;
+  }
+    console.log(sum);     
+  return sum % 10 === 0;
+}
+	
+    var checkCardByNumber = function (cardNumber) 
+    {
+        if (['5018', '5020', '5038', '5893', '6304', 
+            '6759', '6761', '6762', '6763', '0604'].indexOf(cardNumber.slice(0, 4)) != -1) 
+            return 'maestro';
+        else if (cardNumber.slice(0, 4) >=3528 & cardNumber.slice(0, 4) <= 3589) 
+            return 'jcb';
+        else if (cardNumber.slice(0, 3) == 220 ) 
+            return 'mir';
+        else if (['4026', '4405', '4508', '4844', '4913', '4917'].indexOf(cardNumber.slice(0, 4)) != -1) 
+            return 'visael';
+        else if (cardNumber.slice(0, 1) == 4 ) 
+            return 'visa';
+        else if (cardNumber.slice(0, 2) >=51 & cardNumber.slice(0, 2) <= 55) 
+            return 'mc';
+    }
+    //------------------------amensum----------------------------
+    // функция для очистки класса (вызываем при изменении в поле номера карты
+    var clearClass = function () 
+    {
+        var cardImage = document.querySelector('#cards img.hl');
+        // есть ли такой класс у картинки? если да, выключаем
+        if ( cardImage ) cardImage.classList.toggle('hl');
+    }
+</script>
+</body>
+</html>

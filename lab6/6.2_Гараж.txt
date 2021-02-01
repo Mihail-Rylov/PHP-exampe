@@ -1,0 +1,23 @@
+1
+SELECT lab6_1order.Шифр, lab6_1avto.Модель, lab6_1driver.Фамилия, lab6_1route.Место_назначения, lab6_1route.Расстояние, lab6_1order.Дата
+FROM lab6_1order, lab6_1avto, lab6_1transportation, lab6_1driver, lab6_1route
+WHERE lab6_1order.Маршрут = lab6_1route.Шифр  and lab6_1transportation.Автомобиль = lab6_1avto.Номер and lab6_1transportation.ИД = lab6_1driver.ИД and lab6_1transportation.Заказ = lab6_1order.Шифр
+
+2
+SELECT lab6_1order.Шифр, lab6_1avto.Модель, lab6_1driver.Фамилия, lab6_1route.Место_назначения, lab6_1route.Расстояние, lab6_1order.Дата
+FROM lab6_1order, lab6_1avto, lab6_1transportation, lab6_1driver, lab6_1route
+WHERE lab6_1order.Маршрут = lab6_1route.Шифр  and lab6_1transportation.Автомобиль = lab6_1avto.Номер and lab6_1transportation.ИД = lab6_1driver.ИД and lab6_1transportation.Заказ = lab6_1order.Шифр
+
+3
+SELECT DISTINCT lab6_1driver.Фамилия, lab6_1driver.Имя, lab6_1driver.Отчество, COUNT(lab6_1order.Шифр) AS 'Кол-во заказов', SUM( lab6_1route.Расстояние) AS 'Общее расстояние'
+FROM lab6_1driver, lab6_1route, lab6_1order, lab6_1transportation
+WHERE lab6_1route.Шифр = lab6_1order.Маршрут and lab6_1order.Шифр = lab6_1transportation.Заказ and lab6_1transportation.ИД = lab6_1driver.ИД
+GROUP BY lab6_1driver.Фамилия
+ORDER BY lab6_1route.Шифр DESC, lab6_1route.Расстояние DESC, lab6_1driver.Фамилия asc
+
+4
+SELECT lab6_1avto.Номер, lab6_1avto.Производитель, lab6_1avto.Модель, SUM(lab6_1route.Расстояние)
+FROM lab6_1transportation, lab6_1route, lab6_1order, lab6_1avto
+WHERE lab6_1route.Шифр = lab6_1order.Маршрут and lab6_1order.Шифр = lab6_1transportation.Заказ and lab6_1transportation.Автомобиль = lab6_1avto.Номер
+GROUP BY lab6_1avto.Номер
+ORDER by lab6_1route.Расстояние desc, lab6_1avto.Номер desc, lab6_1avto.Производитель asc, lab6_1avto.Модель asc

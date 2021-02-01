@@ -1,0 +1,43 @@
+table {
+	border-collapse: collapse;
+}
+
+td {
+	border: 1px solid #800;
+	padding: 4px;
+}
+
+.topic{
+	color: orange;
+	font-style: italic;
+}
+
+.blue{
+	color: blue;
+}
+
+i {
+	color: red;
+	font-weight: bold;
+}
+
+.fox{
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline{
+	text-decoration: underline;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}

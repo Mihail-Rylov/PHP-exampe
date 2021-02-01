@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8>
+<title>Крестики-нолики</title>
+<script src="js/jquery-latest.js"></script>
+<script>
+ $(document).ready(function() {
+ $("td").on("contextmenu", false);
+ 
+ $('#new').click(function() {
+       $("#1").css("background-color","white");
+	   $("#1").css("background-color","white");
+	   $("#2").css("background-color","white");
+	   $("#3").css("background-color","white");
+	   $("#4").css("background-color","white");
+	   $("#5").css("background-color","white");
+	   $("#6").css("background-color","white");
+	   $("#7").css("background-color","white");
+	   $("#8").css("background-color","white");
+	   $("#9").css("background-color","white");
+	   $("#1").html("");
+	   $("#2").html("");
+	   $("#3").html("");
+	   $("#4").html("");
+	   $("#5").html("");
+	   $("#6").html("");
+	   $("#7").html("");
+	   $("#8").html("");
+	   $("#9").html("");
+	   $("#new").css("display","none");
+	   $("#konec").html("");
+});
+ 
+ $('td').mousedown(function(event) {
+    switch (event.which) {
+        case 1:
+		    this.innerHTML = "x"
+		
+		
+            break;
+        case 3:
+            this.innerHTML = "o"
+            break;
+    }
+	
+	 if   ($("#1").html() == $("#2").html() && $("#2").html() == $("#3").html() && $("#1").html() != ""){
+       $("#1").css("background-color","yellow");
+	   $("#2").css("background-color","yellow");
+	   $("#3").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#4").html() == $("#5").html() && $("#5").html() == $("#6").html() && $("#4").html() != ""){
+       $("#4").css("background-color","yellow");
+	   $("#5").css("background-color","yellow");
+	   $("#6").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#7").html() == $("#8").html() && $("#8").html() == $("#9").html() && $("#7").html() != ""){
+       $("#7").css("background-color","yellow");
+	   $("#8").css("background-color","yellow");
+	   $("#9").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if    ($("#1").html() == $("#4").html() && $("#4").html() == $("#7").html() && $("#1").html() != ""){
+       $("#1").css("background-color","yellow");
+	   $("#4").css("background-color","yellow");
+	   $("#7").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#2").html() == $("#5").html() && $("#5").html() == $("#8").html() && $("#2").html() != ""){
+       $("#2").css("background-color","yellow");
+	   $("#5").css("background-color","yellow");
+	   $("#8").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#3").html() == $("#6").html() && $("#6").html() == $("#9").html() && $("#3").html() != ""){
+       $("#3").css("background-color","yellow");
+	   $("#6").css("background-color","yellow");
+	   $("#9").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#1").html() == $("#5").html() && $("#5").html() == $("#9").html() && $("#1").html() != ""){
+       $("#1").css("background-color","yellow");
+	   $("#5").css("background-color","yellow");
+	   $("#9").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+	 
+	  if   ($("#3").html() == $("#5").html() && $("#5").html() == $("#7").html() && $("#3").html() != ""){
+       $("#3").css("background-color","yellow");
+	   $("#5").css("background-color","yellow");
+	   $("#7").css("background-color","yellow");
+	   $("#konec").html("Игра окончена");
+	   $("#new").css("display","block");
+     }
+});
+ });
+</script>
+<style>
+table td{
+    font-size: 80pt;
+    border:1px solid black;
+    text-align:center;
+    width:33.33%;
+    height:33.33%;
+}
+#konec {
+font-size: 25pt;
+}
+#new { 
+display :none;
+}
+</style>
+</head>
+<body>
+<table style="width:600px; height:600px;">
+    <tr>
+        <td id="1"></td>
+        <td id="2"></td>
+        <td id="3"></td>
+    </tr>
+    <tr>
+        <td id="4"></td>
+        <td id="5"></td>
+        <td id="6"></td>
+    </tr>
+    <tr>
+        <td id="7"></td>
+        <td id="8"></td>
+        <td id="9"></td>
+    </tr>
+</table>
+<p id="konec"></p>
+<button id="new">Начать новую игру</button>
+</body>
+</html>

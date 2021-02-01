@@ -1,0 +1,5 @@
+Options +indexes
+AuthName "Restricted area"
+AuthType Basic
+AuthUserFile /home/ryilov/public_html/lab2/admin/.htpasswd
+Require valid-user
