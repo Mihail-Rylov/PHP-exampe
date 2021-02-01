@@ -1,1 +1,1 @@
-# PHP-exampe
+# PHP-example
